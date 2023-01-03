@@ -1,0 +1,48 @@
+{% extends 'main.html' %}
+
+{% block title %}
+<title>Cart Items</title>
+{% endblock title %}
+
+{% block content %}
+
+
+<h1> Cart Items</h1>
+
+{% for name in CartItems %}
+
+        <div>
+            <div class="card" >
+              <div class="col-xxl-6">
+              <div class="card text-center">
+                <div class="card-body", width =15px>
+                    Product Name - {{name.productname}}<br>
+                    Price - {{name.Price}}<br>
+                    Qty - {{name.quantity}}<br>
+                    Total - {{name.total}}<br>
+                    
+                    <form name="form" method="post" action="{% url 'remove' %}">
+                  
+                      {% csrf_token %}
+                      <input type="submit" name="Submit" value="-"/>
+                    </form>
+                  <form name="form" method="post" action="{% url 'addtocart' %}">
+                  
+                    {% csrf_token %}
+                    <input type="hidden" name="userid" value={{name.userid}} />
+                   
+                    <input type="submit" name="Submit" value="Checkout"/>
+                  </form>
+                 
+                 
+                </div>
+              </div>
+              </div>
+            </div>
+            
+           
+        </div>
+{% endfor %}
+
+{% endblock content %}
+

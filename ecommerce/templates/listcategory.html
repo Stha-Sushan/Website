@@ -1,0 +1,39 @@
+{% extends 'main.html' %}
+
+{% block title %}
+<title>List Data</title>
+{% endblock title %}
+
+{% block content %}
+
+{% for name in ProductList %}
+        <div>
+            <div class="card" >
+              <div class="col-xxl-6">
+              <div class="card text-center">
+                <div class="card-body", width =15px>
+                  <img src = "/{{name.pimage}}" class="card-img-top img-fluid img-thumbnail" alt="{{name.name}}" />
+                  <h5 class="card-title">{{name.name}}</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <form name="form" method="post" action="{% url 'addtocart' %}">
+                  
+                    {% csrf_token %}
+                    <input type="hidden" name="userid" value={{user.id}} />
+                    <input type="hidden" name="productid"value={{name.id}}  />
+                    <input type="hidden" name="productname"value={{name.name}}  />
+                    <input type="hidden" name="price"value={{name.Price}}  />
+                    <input type="text" name="quantity" value=""  /><br/>
+                    <input type="submit" name="Submit" value="Add to Cart"/>
+                  </form>
+                 
+                 
+                </div>
+              </div>
+              </div>
+            </div>
+            
+            <h3>{{name.id}} - {{name.name}} - {{name.Description}} - {{name.Price}}</h3>
+        </div>
+{% endfor %}
+
+{% endblock content %}

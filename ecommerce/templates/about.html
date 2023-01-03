@@ -1,0 +1,22 @@
+{% extends 'main.html' %}
+
+{% block title %}
+<title>About Us</title>
+{% endblock title %}
+
+{% block content %}
+
+{% for name in names %}
+    <div>
+        <h2>{{name.id}} - {{name.cname}} - {{name.Description}}</h2>
+    </div>
+{% endfor %}
+
+    
+    <h1>About Us</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae eaque, nisi minima necessitatibus impedit alias beatae velit officiis quod, aspernatur harum in delectus cumque magnam architecto repellendus consequuntur molestiae eveniet.
+    </p>
+
+
+{% endblock content %}
+
