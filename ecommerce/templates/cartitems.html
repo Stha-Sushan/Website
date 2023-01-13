@@ -16,23 +16,18 @@
               <div class="col-xxl-6">
               <div class="card text-center">
                 <div class="card-body", width =15px>
+                    Id - {{name.id}}<br>
                     Product Name - {{name.productname}}<br>
                     Price - {{name.Price}}<br>
                     Qty - {{name.quantity}}<br>
                     Total - {{name.total}}<br>
                     
-                    <form name="form" method="post" action="{% url 'remove' %}">
-                  
-                      {% csrf_token %}
+                    <form name="form" method="post" action="{% url 'remove' name.id %}">
+                      {% csrf_token %} 
+                      <input type="hidden" name="userid" value={{name.userid}} />
                       <input type="submit" name="Submit" value="-"/>
                     </form>
-                  <form name="form" method="post" action="{% url 'addtocart' %}">
-                  
-                    {% csrf_token %}
-                    <input type="hidden" name="userid" value={{name.userid}} />
-                   
-                    <input type="submit" name="Submit" value="Checkout"/>
-                  </form>
+                 
                  
                  
                 </div>

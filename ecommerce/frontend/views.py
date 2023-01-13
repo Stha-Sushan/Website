@@ -5,6 +5,7 @@ from .models import Category, Product, Cart_item
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
 import datetime
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -119,18 +120,38 @@ def logout(request):
     return render(request, 'login.html')
 
 
-def remove(self, product):
-    """
-    Remove a product from the cart.
-    """
-    product_id = str(product.id)
-    if product_id in self.cart:
-        # Subtract 1 from the quantity
-        self.cart[product_id]['quantity'] -= 1
-        # If the quantity is now 0, then delete the item
-        if self.cart[product_id]['quantity'] == 0:
-            del self.cart[product_id]
-        self.save()
+def remove(request, product):
+    current_user = request.user
+    userid = current_user.id
+    Cart_item.objects.filter(id = product).delete()
+    return redirect('cartitems', userid)
+
+
+def send_email(request):
+    subject = "Hello from Django"
+    message = "This is a test email from Django"
+    from_email = "susan@gmail.com"
+    recipient_list = ["7d0cbefa56-90f3d0+1@inbox.mailtrap.io"]
+    send_mail(subject, message, from_email, recipient_list)
+
+def email(request):
+
+    if request.method=='POST':
+        email=request.POST['email']
+        subject=request.POST['subject']
+        message=request.POST['message']
+        user = auth.authenticate(email=email)
+        if email==email:
+            auth.email(request, user)               
+        else:
+            print("Email not Found")
+        return redirect('/frontend')
+    else:
+        return render(request, 'email.html')
+ 
+
+
+
     
 
     

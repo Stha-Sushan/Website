@@ -1,0 +1,23 @@
+{% extends 'main.html'  %}
+
+
+{% block title %}
+<title>Email</title>
+{% endblock title %}
+
+{% block content %}
+    
+<h1>Email</h1>
+<div>
+
+    <form actions = "email" method="post">
+        {% csrf_token %}
+        <input type="email" name="email" placeholder="To" required /><br/>
+        <input type="text" name="subject" placeholder="Subject" /><br/>
+        <input type="text" name="message" placeholder="Message" /><br/>
+        <input type="submit" name="Send" value="Send"/>
+    </form>
+  
+
+</div>
+{% endblock content %}
